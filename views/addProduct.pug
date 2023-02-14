@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Add product</h2>
+
+<form action="/amazon.com/seller/addProduct" method="post">
+  <label for="name">Product name:</label><br>
+  <input type="text" id="name" name="name"><br><br>
+  <label for="category">Product category:</label><br>
+  <input type="text" id="category" name="category"><br><br>
+  <label for="price">Product price (between 1$ and 10000$):</label><br>
+  <input type="number" id="price" name="price" min="1" max="10000"><br><br>
+  
+  <input type="submit" value="Submit">
+</form> 
+
+
+</body>
+</html>
