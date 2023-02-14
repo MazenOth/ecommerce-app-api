@@ -24,9 +24,5 @@ app.use("/amazon.com/seller/deleteProduct", deleteProduct);
 app.set("view engine", "pug");
 app.set("views", "./views");
 
-app.get("/amazon.com", (req, res) => {
-  res.send("Welcome to Amazon.");
-});
-
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
