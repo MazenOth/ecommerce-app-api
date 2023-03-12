@@ -11,12 +11,11 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  var id = req.body.id;
   var name = req.body.name;
   var price = req.body.price;
   var category = req.body.category;
-  sellerService.updateProductName(name);
-  sellerService.updateProductPrice(price);
-  var resMessege = sellerService.updateProductCategory(category);
+  var resMessege = sellerService.updateProduct(id, name, category, price);
   res.send(resMessege);
 });
 

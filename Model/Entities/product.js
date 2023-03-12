@@ -1,41 +1,38 @@
-module.exports = class Product {
-  #name;
-  #price;
-  #category;
+const Joi = require("joi");
+const mongoose = require("mongoose");
 
-  constructor(name, price, category) {
-    this.#name = name;
-    this.#price = price;
-    this.#category = category;
-  }
+const productSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 50,
+  },
+  category: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 50,
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+});
 
-  get getName() {
-    return this.#name;
-  }
-  set setName(name) {
-    if (name === "") {
-      throw new Error("You cannot enter empty product name!");
-    }
-    this.#name = name;
-  }
+const Product = mongoose.model("Product", productSchema);
 
-  get getPrice() {
-    return this.#price;
-  }
-  set setPrice(price) {
-    if (price <= 0) {
-      throw new Error("Your price should be bigger than 0!");
-    }
-    this.#price = price;
-  }
-
-  get getCategory() {
-    return this.#category;
-  }
-  set setCategory(category) {
-    if (category === "") {
-      throw new Error("You cannot enter empty category!");
-    }
-    this.#category = category;
-  }
+function validateProduct(product) {
+  const schema = Joi.object({
+    name: Joi.string().min(5).max(50).required(),
+    category: Joi.string().min(5).max(50).required(),
+    price: Joi.number().min(0).required(),
+  });
+  return schema.validate(applicationUser);
 }
+
+exports.productSchema = productSchema;
+exports.Product = Product;
+exports.validate = validateProduct;
+

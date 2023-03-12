@@ -1,9 +1,11 @@
-const ProductDatabase = require("../model/repos/productdatabase");
-
-const productDatabase = new ProductDatabase();
+const {
+  Product,
+  validate,
+} = require("../Model/Entities/product");
 
 module.exports = class ProductService {
-  listProducts() {
-    return productDatabase.getProducts;
+  async listProducts() {
+    const products = await Product.find().sort("name");
+  console.log(products);
   }
 };

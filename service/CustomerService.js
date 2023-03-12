@@ -1,8 +1,14 @@
-const ProductDatabase = require("../Model/Repos/productdatabase");
-const UsersDatabase = require("../Model/Repos/UsersDatabase");
+// // const ProductDatabase = require("../Model/Repos/productdatabase");
+// // const UsersDatabase = require("../Model/Repos/UsersDatabase");
 
-const usersDatabase = new UsersDatabase();
-const productDatabase = new ProductDatabase();
+// const usersDatabase = new UsersDatabase();
+// const productDatabase = new ProductDatabase();
+
+const {
+  Product,
+  validate,
+  ApplicationUser,
+} = require("../Model/Entities/ApplicationUser");
 
 module.exports = class CustomerService {
   buyProduct(productName) {
@@ -16,16 +22,17 @@ module.exports = class CustomerService {
       return "Please check your product's name!";
     }
   }
-  editAccountDataEmail(email) {
-    usersDatabase.getTestCustomer.setEmail = email;
-  }
-  editAccountDataPassword(password) {
-    usersDatabase.getTestCustomer.setPassword = password;
-  }
-  editAccountDataBalance(balance) {
-    usersDatabase.getTestCustomer.setBalance = balance;
-    return `Your new email is ${usersDatabase.getTestCustomer.getEmail}
-    Your new password is ${usersDatabase.getTestCustomer.getPassword}
-    Your new balance is ${balance}`;
+ 
+  async editAccountData(id, email, password, balance) {
+    const user = await ApplicationUser.findByIdAndUpdate(
+      id,
+      { email: email, password: password, balance: balance },
+      { new: true }
+    );
+  
+    if (!user)
+      console.log("The user with the given ID wasn't found.");
+  
+    console.log(user);
   }
 };

@@ -1,35 +1,46 @@
-const ProductDatabase = require("../model/repos/productdatabase");
+// const ProductDatabase = require("../model/repos/productdatabase");
 
-const productDatabase = new ProductDatabase();
+// const productDatabase = new ProductDatabase();
+
+const {
+  Product,
+  validate,
+} = require("../Model/Entities/product");
 
 module.exports = class SellerService {
-  addProductName(productName) {
-    productDatabase.getNewProduct.setName = productName;
+  async addProduct(name, category, price) {
+    let product = new Product({
+      name: name,
+      category: category,
+      price: price,
+    });
+
+    product = await product.save();
+
+    console.log(product);
+
+    return product;
   }
-  addProductPrice(price) {
-    productDatabase.getNewProduct.setPrice = price;
+
+  async updateProduct(id, name, category, price) {
+    const product = await Product.findByIdAndUpdate(
+      id,
+      { name: name, category: category, price: price },
+      { new: true }
+    );
+  
+    if (!product)
+      console.log("The product with the given ID wasn't found.");
+  
+    console.log(product);
   }
-  addProductCategory(category) {
-    productDatabase.getNewProduct.setCategory = category;
-    productDatabase.addProduct();
-    return `Your product name is: ${productDatabase.getNewProduct.getName}, 
-    your product category is: ${productDatabase.getNewProduct.getCategory}, 
-    Your product price is: ${productDatabase.getNewProduct.getPrice}`;
+
+  async deleteProduct(id) {
+    const product = await Product.findByIdAndRemove(id);
+
+    if (!product)
+     console.log("The product with the given ID wasn't found.");
+
+    console.log(product);
   }
-  updateProductName(productName) {
-    productDatabase.getTestProduct.setName = productName;
-  }
-  updateProductPrice(price) {
-    productDatabase.getTestProduct.setPrice = price;
-  }
-  updateProductCategory(category) {
-    productDatabase.getTestProduct.setCategory = category;
-    productDatabase.updateProduct();
-    return `Your new product name is: ${productDatabase.getTestProduct.getName}, 
-    your new product category is: ${productDatabase.getTestProduct.getCategory}, 
-    Your new product price is: ${productDatabase.getTestProduct.getPrice}`;
-  }
-  deleteProduct(productName) {
-    return productDatabase.deleteProduct(productName);
-  }
-};
+}; 

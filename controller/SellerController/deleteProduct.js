@@ -11,8 +11,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  var name = req.body.name;
-  var resMessege = sellerService.deleteProduct(name);
+  var id = req.body.id;
+  var resMessege = sellerService.deleteProduct(id);
   res.send(resMessege);
 });
 

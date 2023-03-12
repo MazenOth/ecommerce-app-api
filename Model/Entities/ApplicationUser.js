@@ -1,54 +1,44 @@
-module.exports = class ApplicationUser {
-  #email;
-  #password;
-  #role;
-  #balance;
+const Joi = require("joi");
+const mongoose = require("mongoose");
 
-  constructor(email, password, role, balance = 0) {
-    this.#email = email;
-    this.#password = password;
-    this.#role = role;
-    this.#balance = balance;
-  }
+const applicationUserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 50,
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6,
+    maxlength: 50,
+  },
+  role: {
+    type: String,
+    required: true,
+    enum: ["seller", "customer"],
+  },
+  balance: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+});
 
-  get getEmail() {
-    return this.#email;
-  }
+const ApplicationUser = mongoose.model("ApplicationUser", applicationUserSchema);
 
-  set setEmail(newEmail) {
-    if (newEmail === "") {
-      throw new Error("You cannot enter empty email!");
-    }
-    this.#email = newEmail;
-  }
+function validateApplicationUser(applicationUser) {
+  const schema = Joi.object({
+    email: Joi.string().min(5).max(50).required(),
+    pwd: Joi.string().min(6).max(50).required(),
+    role: Joi.string(),
+  });
+  return schema.validate(applicationUser);
+}
 
-  get getPassword() {
-    return this.#password;
-  }
+exports.applicationUserSchema = applicationUserSchema;
+exports.ApplicationUser = ApplicationUser;
+exports.validate = validateApplicationUser; 
 
-  set setPassword(newPassword) {
-    if (newPassword.toString().length < 4) {
-      throw new Error(
-        "You cannot enter password less than 4 charachters or numbers!"
-      );
-    }
-    this.#password = newPassword;
-  }
 
-  get getRole() {
-    return this.#role;
-  }
-  set setRole(role) {
-    this.#role = role;
-  }
-
-  get getBalance() {
-    return this.#balance;
-  }
-  set setBalance(balance) {
-    if (balance < 0) {
-      throw new Error("Please enter a valid amount of balance!");
-    }
-    this.#balance = balance;
-  }
-};

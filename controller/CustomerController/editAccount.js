@@ -11,12 +11,12 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  var id = req.body.id;
   var email = req.body.email;
   var password = req.body.pwd;
   var balance = req.body.balance;
-  customerService.editAccountDataEmail(email);
-  customerService.editAccountDataPassword(password);
-  var resMessege = customerService.editAccountDataBalance(balance);
+
+  var resMessege = customerService.editAccountData(id, email, password, balance);
   res.send(resMessege);
 });
 

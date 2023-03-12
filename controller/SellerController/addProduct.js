@@ -14,9 +14,7 @@ router.post("/", (req, res) => {
   var name = req.body.name;
   var price = req.body.price;
   var category = req.body.category;
-  sellerService.addProductName(name);
-  sellerService.addProductPrice(price);
-  var resMessege = sellerService.addProductCategory(category);
+  var resMessege = sellerService.addProduct(name, category, price);
   res.send(resMessege);
 });
 
