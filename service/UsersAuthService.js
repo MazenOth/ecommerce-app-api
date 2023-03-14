@@ -3,13 +3,12 @@
 const {
   ApplicationUser,
   validate,
-} = require("../Model/Entities/ApplicationUser");
+} = require("../Model/Entities/applicationUser");
 
 module.exports = class UsersAuthService {
   #currentUserIndex;
 
   async signIn(body, email, password) {
-
     const { error } = validate(body);
     if (error) {
       return "Validation error";

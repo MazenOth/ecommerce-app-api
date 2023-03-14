@@ -8,11 +8,12 @@ const {
 } = require("../Model/Entities/product");
 
 module.exports = class SellerService {
-  async addProduct(name, category, price) {
+  async addProduct(name, category, price, numberInStock) {
     let product = new Product({
       name: name,
       category: category,
       price: price,
+      numberInStock: numberInStock
     });
 
     product = await product.save();

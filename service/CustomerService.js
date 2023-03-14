@@ -8,7 +8,7 @@ const {
   Product,
   validate,
   ApplicationUser,
-} = require("../Model/Entities/ApplicationUser");
+} = require("../Model/Entities/applicationUser");
 
 module.exports = class CustomerService {
   buyProduct(productName) {
@@ -22,17 +22,16 @@ module.exports = class CustomerService {
       return "Please check your product's name!";
     }
   }
- 
+
   async editAccountData(id, email, password, balance) {
     const user = await ApplicationUser.findByIdAndUpdate(
       id,
       { email: email, password: password, balance: balance },
       { new: true }
     );
-  
-    if (!user)
-      console.log("The user with the given ID wasn't found.");
-  
+
+    if (!user) console.log("The user with the given ID wasn't found.");
+
     console.log(user);
   }
 };

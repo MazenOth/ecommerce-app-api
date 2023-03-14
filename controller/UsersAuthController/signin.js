@@ -6,7 +6,7 @@ const usersAuthService = new UsersAuthService();
 const {
   ApplicationUser,
   validate,
-} = require("../../Model/Entities/ApplicationUser");
+} = require("../../Model/Entities/applicationUser");
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -15,8 +15,7 @@ router.get("/", (req, res) => {
   res.render("signin");
 });
 
-router.post("/", async(req, res) => {
-
+router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);

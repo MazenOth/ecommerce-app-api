@@ -15,7 +15,8 @@ router.post("/", (req, res) => {
   var password = req.body.pwd;
   var role = "seller"
   var resMessege = usersAuthService.signUp(email, password, role);
-  res.send(resMessege);
+
+  res.send(typeof resMessege.then((value) => value ));
 });
 
 module.exports = router;
