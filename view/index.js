@@ -18,15 +18,15 @@ const addProduct = require("../controller/SellerController/addProduct");
 const updateProduct = require("../controller/SellerController/updateProduct");
 const deleteProduct = require("../controller/SellerController/deleteProduct");
 
-app.use("/amazon.com/signin", signin);
-app.use("/amazon.com/customer/signup", customerSignup);
-app.use("/amazon.com/customer/buyProduct", buyProduct);
-app.use("/amazon.com/customer/editAccount", editAccount);
-app.use("/amazon.com/listProducts", listProducts);
-app.use("/amazon.com/seller/signup", sellerSignup);
-app.use("/amazon.com/seller/addProduct", addProduct);
-app.use("/amazon.com/seller/updateProduct", updateProduct);
-app.use("/amazon.com/seller/deleteProduct", deleteProduct);
+app.use("/ecommerce.com/signin", signin);
+app.use("/ecommerce.com/customer/signup", customerSignup);
+app.use("/ecommerce.com/customer/buyProduct", buyProduct);
+app.use("/ecommerce.com/customer/editAccount", editAccount);
+app.use("/ecommerce.com/listProducts", listProducts);
+app.use("/ecommerce.com/seller/signup", sellerSignup);
+app.use("/ecommerce.com/seller/addProduct", addProduct);
+app.use("/ecommerce.com/seller/updateProduct", updateProduct);
+app.use("/ecommerce.com/seller/deleteProduct", deleteProduct);
 
 app.set("view engine", "pug");
 app.set("views", "../views");
