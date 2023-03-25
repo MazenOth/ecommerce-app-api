@@ -6,11 +6,11 @@ const sellerService = new SellerService();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   res.render("updateProduct");
 });
 
-router.post("/", (req, res) => {
+router.post("/", (req, res, next) => {
   var id = req.body.id;
   var name = req.body.name;
   var price = req.body.price;

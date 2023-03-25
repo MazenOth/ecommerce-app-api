@@ -10,11 +10,11 @@ const customerService = new CustomerService();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   res.render("buyProduct");
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);

@@ -6,11 +6,11 @@ const usersAuthService = new UsersAuthService();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   res.render("sellerSignup");
 });
 
-router.post("/", (req, res) => {
+router.post("/", (req, res, next) => {
   var email = req.body.email;
   var password = req.body.pwd;
   var role = "seller"

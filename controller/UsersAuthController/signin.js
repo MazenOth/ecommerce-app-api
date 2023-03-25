@@ -11,11 +11,14 @@ const {
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {
+const p = Promise.reject(new Error("Something failed DRAMATICLY!"));
+p.then(() => console.log("Done"));
+
+router.get("/", (req, res, next) => {
   res.render("signin");
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);

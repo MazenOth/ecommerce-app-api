@@ -6,11 +6,11 @@ const productService = new ProductService();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   res.render("listProducts");
 });
 
-router.post("/", (req, res) => {
+router.post("/", (req, res, next) => {
   var resMessege = productService.listProducts();
   res.send(resMessege);
 });
