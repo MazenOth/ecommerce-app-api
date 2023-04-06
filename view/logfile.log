@@ -41,3 +41,9 @@
 {"level":"info","message":"Listening on port 3000..."}
 {"level":"error","message":"Something failed DRAMATICLY!"}
 {"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"error","message":"Something failed DRAMATICLY!"}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 3000..."}
+{"level":"error","message":"Something failed DRAMATICLY!"}
+{"level":"info","message":"Connected to MongoDB..."}
