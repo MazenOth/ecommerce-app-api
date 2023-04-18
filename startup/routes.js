@@ -1,8 +1,8 @@
 const signin = require("../controller/UsersAuthController/signin");
-const customerSignup = require("../controller/UsersAuthController/customerSignup");
-const sellerSignup = require("../controller/UsersAuthController/sellerSignup");
+const signup = require("../controller/UsersAuthController/signup");
 const buyProduct = require("../controller/CustomerController/buyProduct");
-const editAccount = require("../controller/CustomerController/editAccount");
+const editAccountCustomer = require("../controller/CustomerController/editAccount");
+const editAccountSeller = require("../controller/SellerController/editAccount");
 const listProducts = require("../controller/ProductController/listProducts");
 const addProduct = require("../controller/SellerController/addProduct");
 const updateProduct = require("../controller/SellerController/updateProduct");
@@ -11,11 +11,11 @@ const error = require("../middleware/error");
 
 module.exports = function (app) {
   app.use("/ecommerce.com/signin", signin);
-  app.use("/ecommerce.com/customer/signup", customerSignup);
+  app.use("/ecommerce.com/signup", signup);
   app.use("/ecommerce.com/customer/buyProduct", buyProduct);
-  app.use("/ecommerce.com/customer/editAccount", editAccount);
+  app.use("/ecommerce.com/customer/editAccount", editAccountCustomer);
+  app.use("/ecommerce.com/seller/editAccount", editAccountSeller);
   app.use("/ecommerce.com/listProducts", listProducts);
-  app.use("/ecommerce.com/seller/signup", sellerSignup);
   app.use("/ecommerce.com/seller/addProduct", addProduct);
   app.use("/ecommerce.com/seller/updateProduct", updateProduct);
   app.use("/ecommerce.com/seller/deleteProduct", deleteProduct);

@@ -13,11 +13,7 @@ const Purchase = mongoose.model(
           minlength: 5,
           maxlength: 50,
         },
-        role: {
-          type: String,
-          required: true,
-          enum: ["customer"],
-        },
+        roles: ["customer"],
       }),
       required: true,
     },
@@ -48,8 +44,8 @@ const Purchase = mongoose.model(
 
 function validatePurchase(purchase) {
   const schema = Joi.object({
-    applicationUserId: Joi.objectId(),
-    productId: Joi.objectId(),
+    applicationUserId: Joi.objectId().required(),
+    productId: Joi.objectId().required(),
   });
   return schema.validate(purchase);
 }

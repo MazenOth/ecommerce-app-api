@@ -1,11 +1,11 @@
+const customer = require("../../middleware/customer");
+const auth = require("../../middleware/auth");
 const { Purchase, validate } = require("../../Model/Entities/purchase");
 const { ApplicationUser } = require("../../Model/Entities/applicationUser");
 const { Product } = require("../../Model/Entities/product");
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
-const CustomerService = require("../../service/CustomerService");
-const customerService = new CustomerService();
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -14,7 +14,7 @@ router.get("/", (req, res, next) => {
   res.render("buyProduct");
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", [auth, customer], async (req, res, next) => {
   const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
@@ -33,7 +33,7 @@ router.post("/", async (req, res, next) => {
     applicationUser: {
       _id: applicationUser._id,
       email: applicationUser.email,
-      role: applicationUser.role,
+      roles: applicationUser.roles,
     },
     product: {
       _id: product._id,

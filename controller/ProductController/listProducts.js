@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const ProductService = require("../../service/ProductService");
-const productService = new ProductService();
+const { Product } = require("../../Model/Entities/product");
+
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
@@ -10,9 +10,9 @@ router.get("/", (req, res, next) => {
   res.render("listProducts");
 });
 
-router.post("/", (req, res, next) => {
-  var resMessege = productService.listProducts();
-  res.send(resMessege);
+router.post("/", async (req, res, next) => {
+  const products = await Product.find().sort("name");
+  res.send(products);
 });
 
 module.exports = router;

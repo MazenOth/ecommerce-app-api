@@ -1,4 +1,4 @@
-const customer = require("../../middleware/customer");
+const seller = require("../../middleware/seller");
 const auth = require("../../middleware/auth");
 const express = require("express");
 const router = express.Router();
@@ -15,7 +15,7 @@ router.get("/", (req, res, next) => {
   res.render("editAccount");
 });
 
-router.post("/:id", [auth, customer], async (req, res, next) => {
+router.post("/:id", [auth, seller], async (req, res, next) => {
   const { error } = validate(req.body);
 
   if (error) {
@@ -24,7 +24,7 @@ router.post("/:id", [auth, customer], async (req, res, next) => {
 
   const user = await ApplicationUser.findByIdAndUpdate(
     req.params.id,
-    { email: req.body.email, password: req.body.password, roles: "customer", balance: 0 },
+    { email: req.body.email, password: req.body.password, roles: "seller", balance: req.body.balance },
     { new: true }
   );
 
