@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/MazenOth/sellerconsole#readme",
   "devDependencies": {
-    "jest": "^29.3.1"
+    "jest": "^29.5.0"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
